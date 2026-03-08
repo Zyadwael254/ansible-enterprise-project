@@ -1,0 +1,21 @@
+---
+- name: Update apt cache and upgrade all packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+    cache_valid_time: 3600
+
+- name: Install Network & Admin tools
+  apt:
+    name:
+      - net-tools
+      - curl
+      - traceroute
+      - ufw
+    state: present
+
+- name: Allow SSH through Firewall
+  ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
